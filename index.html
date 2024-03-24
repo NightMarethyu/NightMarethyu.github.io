@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ammon Turner's Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+  <!--<link rel="script" href="script.js">-->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let greetings = ['Hello', 'Kamusta', 'Bonjour', 'Aloha', 'こんにちは', '안녕하세요', 'Hola', '你好', 'Hallo', 'Ciao', 'Olá', 'Привет', 'Merhaba', 'مرحبا', 'नमस्ते', 'สวัสดี', 'Chào', '안녕하세요', 'Salut', 'Hallo', 'Hej', 'Hoi', 'Hei',];
+      const greeting = document.getElementById('greeting');
+    
+      function randomGreeting() {
+        const randomIndex = Math.floor(Math.random() * greetings.length);
+        return greetings[randomIndex];
+      }
+    
+      function changeGreeting() {
+        greeting.textContent = randomGreeting();
+      }
+      
+      setInterval(changeGreeting, 1500);
+    
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <h1 id="greeting">Hello</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Thank you for stopping by my portfolio. My name is Ammon Turner. I am a Computer Science student at Brigham Young Univeristy–Hawaii. My minors are Japanese and Economics. I have several years experience working in IT for a small 3D printing company in Utah. While there I worked with the company's sole software developer to maintain the website among other simple programming tasks. When he left I became the entire tech department for the company. It was working with him and doing the more CS related aspects of the job that inspired me to return to school to get a degree in CS.</p>
+  <p>
+    While at BYUH I've spent much of my time working with Java, Python, and C++. I have spent some time dabbling in other languages such as Rust and Go. I have a good amount of experience with web development (recall I maintained the website for that 3D printing company). I am often approached by my fellow students with questions about their code or related projects. I try to help them as much as I can and time allows.
+  </p>
+  <p>
+    Outside of software development and I spend time reading, I'm a big speculative fiction fan (Sci-fi, fantasy, and the like). I have been told that I have a bit of a problem when it comes to table-top games. I have a decent collection of board and card games and enjoy a good TTRPG. I enjoy anime and manga, I have a decent grasp of the Japanese language and I love learning about different languages and cultures. I spent two years living in the Philippines as a missionary for the Chruch of Jesus Christ of Latter-day Saints and can understand Tagalog (I spent most of my time there speaking Hiligaynon, a regional language of the Visayas).
+  </p>
+  <p>
+    Some of my other acheivements include:
+    <ul id="achievements">
+      <li>Member of Phi Kappa Phi</li>
+      <li>Member of Upsilon Pi Epsilon</li>
+      <li>2016 2nd place National SkillsUSA Champion in IT (College Level)</li>
+      <li>Certificate in IT Networking from the Ogden-Weber Applied Technology College</li>
+      <li>Member of the National Technical Honor Society</li>
+      <li>Eagle Scout in the Boy Scouts of America</li>
+    </ul>
+  </p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <p>Showcase your coding projects here with descriptions and links.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <p>Provide your contact information and any social media links here.</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Ammon Turner</p>
+  </footer>
+</body>
+</html>
