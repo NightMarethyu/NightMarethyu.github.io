@@ -3,75 +3,267 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ammon Turner's Portfolio</title>
+  <title>Ammon Turner | Software Developer</title>
   <link rel="stylesheet" href="styles.css">
-  <!--<link rel="script" href="script.js">-->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      let greetings = ['Hello', 'Kamusta', 'Bonjour', 'Aloha', 'こんにちは', '안녕하세요', 'Hola', '你好', 'Hallo', 'Ciao', 'Olá', 'Привет', 'Merhaba', 'مرحبا', 'नमस्ते', 'สวัสดี', 'Chào', '안녕하세요', 'Salut', 'Hallo', 'Hej', 'Hoi', 'Hei',];
-      const greeting = document.getElementById('greeting');
-    
-      function randomGreeting() {
-        const randomIndex = Math.floor(Math.random() * greetings.length);
-        return greetings[randomIndex];
-      }
-    
-      function changeGreeting() {
-        greeting.textContent = randomGreeting();
-      }
-      
-      setInterval(changeGreeting, 1500);
-    
-    });
-  </script>
 </head>
 <body>
-  <header>
-    <h1 id="greeting">Hello</h1>
+  <header class="header">
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">AT</div>
+        <ul class="nav-menu">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <h1>Ammon Turner</h1>
+      <p class="hero-subtitle">Software Developer | Python • JavaScript • Data Visualization</p>
+      <p class="hero-description">CS Graduate building scalable solutions and automation tools</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+      </div>
+    </section>
   </header>
 
-  <nav>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+  <main>
+    <section id="about" class="section about-section">
+      <div class="container">
+        <h2>About Me</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              I'm a <strong>Computer Science graduate from Brigham Young University–Hawaii</strong> (December 2024, summa cum laude) with a passion for building software that solves real problems. My background spans IT infrastructure, technical analysis, and full-stack development—giving me a unique perspective on bridging technical systems with user-facing solutions.
+            </p>
+            <p>
+              Most recently, I worked as a <strong>Technical Analyst in the Admissions Department at BYUH</strong>, where I leveraged Python, SQL, and data visualization tools to build dashboards that drove decision-making across multiple departments. I developed scripts to streamline workflows, created multi-year marketing campaigns, and trained team members—all while learning to collaborate effectively in a data-driven environment.
+            </p>
+            <p>
+              I'm deeply interested in <strong>automation, systems design, and building tools that empower teams</strong>. Whether it's writing efficient Python scripts, designing interactive dashboards, or architecting clean, maintainable code, I approach every project with a focus on clarity and impact.
+            </p>
+            <p>
+              Outside of coding, I'm a passionate creator: I design and play tabletop RPGs (Shadowdark is a favorite), build board game strategies, dive into speculative fiction and LitRPG, and explore topics like volcanology and Japanese history. I spent two years in the Philippines as a missionary and have a strong grasp of Japanese and Tagalog.
+            </p>
+          </div>
+          <div class="about-highlights">
+            <div class="highlight">
+              <span class="highlight-label">Education</span>
+              <p>B.S. Computer Science, BYUH (2024)<br><em>Summa Cum Laude</em></p>
+            </div>
+            <div class="highlight">
+              <span class="highlight-label">Honors</span>
+              <p>Phi Kappa Phi • Upsilon Pi Epsilon • NTHS</p>
+            </div>
+            <div class="highlight">
+              <span class="highlight-label">Experience</span>
+              <p>7+ years IT & Software Development</p>
+            </div>
+            <div class="highlight">
+              <span class="highlight-label">Location</span>
+              <p>New Taipei City, Taiwan</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Thank you for stopping by my portfolio. My name is Ammon Turner. I am a Computer Science student at Brigham Young Univeristy–Hawaii. My minors are Japanese and Economics. I have several years experience working in IT for a small 3D printing company in Utah. While there I worked with the company's sole software developer to maintain the website among other simple programming tasks. When he left I became the entire tech department for the company. It was working with him and doing the more CS related aspects of the job that inspired me to return to school to get a degree in CS.</p>
-  <p>
-    While at BYUH I've spent much of my time working with Java, Python, and C++. I have spent some time dabbling in other languages such as Rust and Go. I have a good amount of experience with web development (recall I maintained the website for that 3D printing company). I am often approached by my fellow students with questions about their code or related projects. I try to help them as much as I can and time allows.
-  </p>
-  <p>
-    Outside of software development and I spend time reading, I'm a big speculative fiction fan (Sci-fi, fantasy, and the like). I have been told that I have a bit of a problem when it comes to table-top games. I have a decent collection of board and card games and enjoy a good TTRPG. I enjoy anime and manga, I have a decent grasp of the Japanese language and I love learning about different languages and cultures. I spent two years living in the Philippines as a missionary for the Chruch of Jesus Christ of Latter-day Saints and can understand Tagalog (I spent most of my time there speaking Hiligaynon, a regional language of the Visayas).
-  </p>
-  <p>
-    Some of my other acheivements include:
-    <ul id="achievements">
-      <li>Member of Phi Kappa Phi</li>
-      <li>Member of Upsilon Pi Epsilon</li>
-      <li>2016 2nd place National SkillsUSA Champion in IT (College Level)</li>
-      <li>Certificate in IT Networking from the Ogden-Weber Applied Technology College</li>
-      <li>Member of the National Technical Honor Society</li>
-      <li>Eagle Scout in the Boy Scouts of America</li>
-    </ul>
-  </p>
-  </section>
+    <section id="skills" class="section skills-section">
+      <div class="container">
+        <h2>Technical Skills</h2>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>Languages</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">C#</span>
+              <span class="skill-tag">SQL</span>
+              <span class="skill-tag">Java</span>
+              <span class="skill-tag">C++</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Web Development</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">HTML/CSS</span>
+              <span class="skill-tag">React</span>
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">Flask</span>
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">SEO Optimization</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Data & Tools</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Data Visualization</span>
+              <span class="skill-tag">SQL Databases</span>
+              <span class="skill-tag">Domo Dashboards</span>
+              <span class="skill-tag">Workflow Automation</span>
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">Godot 4</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Software Design</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">System Architecture</span>
+              <span class="skill-tag">Clean Code</span>
+              <span class="skill-tag">Problem-Solving</span>
+              <span class="skill-tag">Cross-functional Teams</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <p>Showcase your coding projects here with descriptions and links.</p>
-  </section>
+    <section id="projects" class="section projects-section">
+      <div class="container">
+        <h2>Featured Projects</h2>
+        <p class="section-subtitle">A selection of work showcasing problem-solving, technical depth, and creative approach to software development</p>
+        
+        <div class="projects-grid">
+          <article class="project-card">
+            <div class="project-header">
+              <h3>Liar's Dice Roguelike</h3>
+              <span class="project-status">In Progress</span>
+            </div>
+            <div class="project-body">
+              <p>A strategic roguelike video game built in Godot 4.x with Balatro-style progression mechanics, dual economy system, and AI opponents with distinct personality profiles.</p>
+              <div class="project-tech">
+                <span class="tech">GDScript</span>
+                <span class="tech">Godot 4.x</span>
+                <span class="tech">Game Design</span>
+                <span class="tech">AI Architecture</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <a href="#" class="project-link">Learn More →</a>
+            </div>
+          </article>
 
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <p>Provide your contact information and any social media links here.</p>
-  </section>
+          <article class="project-card">
+            <div class="project-header">
+              <h3>Text-Based RPG Console</h3>
+              <span class="project-status">In Progress</span>
+            </div>
+            <div class="project-body">
+              <p>Structured RPG system using the C4 Model for architecture and Architecture Decision Records (ADRs) for design patterns. Demonstrates disciplined software engineering practices applied to game development.</p>
+              <div class="project-tech">
+                <span class="tech">C#</span>
+                <span class="tech">Architecture</span>
+                <span class="tech">Design Patterns</span>
+                <span class="tech">ADRs</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <a href="#" class="project-link">Learn More →</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-header">
+              <h3>Admissions Data Dashboards</h3>
+              <span class="project-status">Completed</span>
+            </div>
+            <div class="project-body">
+              <p>Built informational dashboards at BYUH to help admissions officers understand application funnels and student demographics. Developed Python/JavaScript scripts to streamline departmental workflows and integrate with Workday platform.</p>
+              <div class="project-tech">
+                <span class="tech">Python</span>
+                <span class="tech">SQL</span>
+                <span class="tech">Domo</span>
+                <span class="tech">JavaScript</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <a href="#" class="project-link">Learn More →</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-header">
+              <h3>Multi-Page Website & SEO Optimization</h3>
+              <span class="project-status">Completed</span>
+            </div>
+            <div class="project-body">
+              <p>Built a 200+ page website for a 3D printing company in roughly 2 weeks using HTML, CSS, JavaScript, and Flask. Achieved top 3 Google rankings for targeted search terms through systematic SEO optimization.</p>
+              <div class="project-tech">
+                <span class="tech">HTML/CSS</span>
+                <span class="tech">JavaScript</span>
+                <span class="tech">Python/Flask</span>
+                <span class="tech">AWS</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <a href="#" class="project-link">Learn More →</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-header">
+              <h3>Network Infrastructure & Server Management</h3>
+              <span class="project-status">Completed</span>
+            </div>
+            <div class="project-body">
+              <p>Managed network infrastructure for a growing tech company, including 20+ 3D printers and CNC machines. Taught myself GCode to optimize machine monitoring and led server relocation with 1000+ feet of copper network installation.</p>
+              <div class="project-tech">
+                <span class="tech">Network Admin</span>
+                <span class="tech">GCode</span>
+                <span class="tech">System Maintenance</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <a href="#" class="project-link">Learn More →</a>
+            </div>
+          </article>
+
+          <article class="project-card placeholder">
+            <div class="project-header">
+              <h3>Coming Soon</h3>
+            </div>
+            <div class="project-body">
+              <p>Always building something new. Check back for exciting projects combining game design, systems thinking, and practical software engineering.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+      <div class="container">
+        <h2>Let's Connect</h2>
+        <p class="section-subtitle">I'm actively seeking remote software development opportunities. Feel free to reach out!</p>
+        
+        <div class="contact-methods">
+          <a href="mailto:ammon42@gmail.com" class="contact-card">
+            <span class="contact-icon">✉</span>
+            <span class="contact-text">Email</span>
+            <span class="contact-detail">ammon42@gmail.com</span>
+          </a>
+          <a href="https://www.linkedin.com/in/ammondturner" class="contact-card" target="_blank">
+            <span class="contact-icon">👔</span>
+            <span class="contact-text">LinkedIn</span>
+            <span class="contact-detail">ammondturner</span>
+          </a>
+          <a href="https://github.com" class="contact-card" target="_blank">
+            <span class="contact-icon">⚙</span>
+            <span class="contact-text">GitHub</span>
+            <span class="contact-detail">github.com</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <p>&copy; 2024 Ammon Turner</p>
+    <p>&copy; 2026 Ammon Turner. All rights reserved.</p>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
