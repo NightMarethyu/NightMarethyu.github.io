@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dungeon Delver: a web app by Ammon Turner that checks whether a Zelda-style dungeon can be beaten or softlocked.">
+  <title>Dungeon Delver | Ammon Turner</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="../index.html" class="logo">AT</a>
+        <ul class="nav-menu">
+          <li><a href="../index.html#about" class="nav-link">About</a></li>
+          <li><a href="../index.html#skills" class="nav-link">Skills</a></li>
+          <li><a href="../index.html#projects" class="nav-link">Projects</a></li>
+          <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <p class="hero-eyebrow"><a href="../index.html#projects">← All projects</a></p>
+      <h1>Dungeon Delver</h1>
+      <p class="hero-subtitle">Find out whether a Zelda-style dungeon can be beaten before anyone plays it</p>
+      <p class="hero-description">A React web app with a graph-search solver at its core, a map editor, and live results as you build.</p>
+      <div class="hero-cta">
+        <a href="https://nightmarethyu.github.io/dungeon-delver/" class="btn btn-primary" target="_blank" rel="noopener">Try Dungeon Delver</a>
+        <a href="https://github.com/NightMarethyu/dungeon-delver" class="btn btn-secondary" target="_blank" rel="noopener">View the Code</a>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <figure class="case-figure">
+          <img src="../images/dungeon-delver/map-view.png" alt="The lower floor of the Sunken Cistern example on Dungeon Delver's map, in the dark theme. The critical path glows green, lock icons sit on the doors, and the banner says the dungeon is beatable but a softlock is possible.">
+          <figcaption>The map view in the dark theme. The banner says the dungeon can be beaten but two choices leave the player stuck, and the critical path glows green.</figcaption>
+        </figure>
+
+        <div class="about-content">
+          <div class="about-text">
+            <h2>The Problem</h2>
+            <p>
+              Anyone who has designed a dungeon for a Zelda-style game, or for a tabletop RPG, knows the trap: a player spends a small key on the wrong door, or drops down a hole too early, and now <strong>the dungeon can't be finished</strong>. Those softlocks are easy to create and hard to spot by reading a map, because they depend on the order a player does things in.
+            </p>
+            <p>
+              Dungeon Delver lets you sketch how the rooms connect and what locks each connection: small keys, the big key, items like a hookshot, puzzles, and one-way drops. Then it tells you whether the dungeon can be beaten, <strong>every way a player could get stuck</strong>, which rooms are optional, which can't be reached, and what the critical path is. The results update as you edit.
+            </p>
+          </div>
+          <div class="about-highlights">
+            <div class="highlight">
+              <span class="highlight-label">Role</span>
+              <p>Solo project: design, code, and the icon art</p>
+            </div>
+            <div class="highlight">
+              <span class="highlight-label">Stack</span>
+              <p>React 19 • Vite • JavaScript • SVG • React Flow • Vitest • GitHub Actions</p>
+            </div>
+            <div class="highlight">
+              <span class="highlight-label">Status</span>
+              <p>Live, version 1.1 (October 2026)</p>
+            </div>
+            <div class="highlight">
+              <span class="highlight-label">Hosting</span>
+              <p>Static site on GitHub Pages. No accounts, no server.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section skills-section">
+      <div class="container">
+        <h2>How the Solver Works</h2>
+        <p class="section-subtitle">The heart of the project is a plain JavaScript solver with no UI code in it. It only looks at rooms, connections, locks, and what's in each room, never at the map's geometry.</p>
+
+        <div class="case-steps">
+          <div class="case-step">
+            <span class="case-step-number">1</span>
+            <h3>Walk everywhere that's free</h3>
+            <p>From where the player stands, it floods through open connections, unlocked doors, and locks the player can already pass, picking up everything in the rooms it reaches. That repeats until nothing new turns up. None of it involves a choice, so none of it branches.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-number">2</span>
+            <h3>Branch only on real choices</h3>
+            <p>Only two things are real choices: which small-key door to spend a key on (keys are interchangeable, so the wrong door can waste one), and whether to take a one-way connection there's no walking back from. Each choice leads to a new situation.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-number">3</span>
+            <h3>Search every situation once</h3>
+            <p>It explores choices breadth first and remembers situations it has already seen. A guard stops at 50,000 situations and says the dungeon is too complex to check, rather than freezing the browser tab.</p>
+          </div>
+        </div>
+
+        <div class="case-notes">
+          <h3>Design decisions worth calling out</h3>
+          <ul>
+            <li><strong>What counts as "the same situation".</strong> The memo key includes where the player stands and which rooms' contents they've collected, not just which doors are open. Without that, two states on opposite sides of a one-way drop look identical and the solver misses traps.</li>
+            <li><strong>A precise definition of a softlock.</strong> A softlock is the <em>first</em> choice after which the goal can't be reached, reported with the choices that led to it. That's what makes step-by-step playback possible.</li>
+            <li><strong>Useful answers, not just yes or no.</strong> The critical path is a winning route with the fewest choices, and a room is optional when the dungeon stays beatable without it.</li>
+            <li><strong>Tests first.</strong> The solver was written against small hand-made fixture dungeons, each with the results it should give. The project now has over 240 unit tests, run on every push.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>The Editor</h2>
+        <div class="case-gallery">
+          <figure class="case-figure">
+            <img src="../images/dungeon-delver/softlock-playback.png" alt="Softlock playback on the map: after the wasted key, the rooms the player is trapped in are marked on both floors" loading="lazy">
+            <figcaption>Softlock playback steps through each way a player gets stuck, one door or drop at a time, switching floors as it goes.</figcaption>
+          </figure>
+          <figure class="case-figure">
+            <img src="../images/dungeon-delver/live-results.png" alt="The graph view of the Sunken Cistern, with rooms as nodes and the critical path highlighted" loading="lazy">
+            <figcaption>The graph view, built on React Flow, for people who think in nodes and edges.</figcaption>
+          </figure>
+        </div>
+        <div class="about-content case-split">
+          <div class="about-text">
+            <p>
+              The map is drawn in <strong>SVG</strong>, one floor at a time, on a snap grid. Rooms that touch get a door in their shared wall, marked with the icon of its lock, and stairs and holes to other floors sit inside their rooms and jump to the other end when clicked. I made the map the default view because most people designing dungeons think in maps, not graphs.
+            </p>
+            <p>
+              The icons are <strong>my own drawings</strong>. The app reads each SVG and maps its drawn colors to theme variables, so the same art works in the light and dark themes without being redrawn.
+            </p>
+            <p>
+              Version 1.1 added <strong>undo and redo, keyboard shortcuts, and a phone layout</strong>. On a small screen the map fills the page, the side panel becomes a bottom sheet, and touch targets grow for fingers, with pinch to zoom and double-tap to add a room.
+            </p>
+          </div>
+          <figure class="case-figure case-phone">
+            <img src="../images/dungeon-delver/phone-map.png" alt="The Sunken Cistern's ground floor on a phone, with the settings sheet folded at the bottom" loading="lazy">
+            <figcaption>The phone layout.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section skills-section">
+      <div class="container">
+        <h2>Engineering Choices</h2>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>Pure core, thin UI</h3>
+            <p>The dungeon model, every edit, and the solver are pure functions with no React in them. That kept the solver easy to test and made undo and redo straightforward to add later.</p>
+          </div>
+          <div class="skill-category">
+            <h3>A versioned format</h3>
+            <p>Saved dungeons carry a format version, and loading runs them through migrations and validation, so dungeons saved by older versions still open after new lock types are added.</p>
+          </div>
+          <div class="skill-category">
+            <h3>No backend</h3>
+            <p>Dungeons save to the browser's local storage, and share links pack the whole dungeon into the URL, compressed with lz-string. Hash routing keeps every page working on GitHub Pages.</p>
+          </div>
+          <div class="skill-category">
+            <h3>Automated releases</h3>
+            <p>Every push to main runs lint, the test suite, and the build in GitHub Actions, then deploys to GitHub Pages. Releases are tagged and recorded in a changelog.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>What's Next</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              I play and run a lot of tabletop RPGs, so the plan is to grow Dungeon Delver from a Zelda dungeon checker into <strong>a dungeon builder for the table</strong>, with the solver still at its core. Lock and item types are already data rather than hard-coded rules, which leaves room for a table's own locks and items.
+            </p>
+          </div>
+          <div class="about-text">
+            <ul class="case-list">
+              <li>Custom lock and item types</li>
+              <li>Room notes: encounters, treasure, traps</li>
+              <li>Separate game master and player views</li>
+              <li>Switches and state, like water levels</li>
+              <li>Map export as an image or printable page</li>
+              <li>A generator that only makes beatable dungeons</li>
+            </ul>
+          </div>
+        </div>
+        <div class="hero-cta case-cta">
+          <a href="https://nightmarethyu.github.io/dungeon-delver/" class="btn btn-primary" target="_blank" rel="noopener">Try Dungeon Delver</a>
+          <a href="https://github.com/NightMarethyu/dungeon-delver" class="btn btn-secondary" target="_blank" rel="noopener">View the Code</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Ammon Turner. All rights reserved. The Legend of Zelda is a trademark of Nintendo; Dungeon Delver is an unofficial fan project.</p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
