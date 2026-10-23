@@ -129,6 +129,34 @@
         
         <div class="projects-grid">
           <article class="project-card featured">
+            <a href="projects/dungeon-delver.html" class="project-image">
+              <img src="images/dungeon-delver/map-view.png" alt="Dungeon Delver's map of a two-floor dungeon in the dark theme, with the critical path glowing green and lock icons on the doors" loading="lazy">
+            </a>
+            <div class="project-header">
+              <h3>Dungeon Delver</h3>
+              <span class="project-status">Live · v1.1</span>
+            </div>
+            <div class="project-body">
+              <p>A web app that checks whether a Zelda-style dungeon can be beaten before anyone plays it. Lay out rooms floor by floor, lock the doors with small keys, the big key, items, puzzles, and one-way drops, and it reports whether the goal can be reached, every way a player could softlock, which rooms are optional, and the critical path.</p>
+              <p>The solver is a breadth-first search over game states that only branches on real choices, with a fixture test suite of hand-made dungeons. Results update live on an SVG map editor with doors in shared walls, stairs between floors, and my own drawn icons. Undo, keyboard shortcuts, a phone layout, and share links that carry the whole dungeon in the URL, with no backend.</p>
+              <div class="project-tech">
+                <span class="tech">React</span>
+                <span class="tech">Vite</span>
+                <span class="tech">JavaScript</span>
+                <span class="tech">Graph Search</span>
+                <span class="tech">SVG</span>
+                <span class="tech">Vitest</span>
+                <span class="tech">GitHub Actions</span>
+              </div>
+            </div>
+            <div class="project-footer project-links">
+              <a href="projects/dungeon-delver.html" class="project-link">Read the Case Study →</a>
+              <a href="https://nightmarethyu.github.io/dungeon-delver/" class="project-link" target="_blank" rel="noopener">Try It →</a>
+              <a href="https://github.com/NightMarethyu/dungeon-delver" class="project-link" target="_blank" rel="noopener">View Code →</a>
+            </div>
+          </article>
+
+          <article class="project-card featured">
             <a href="https://nightmarethyu.github.io/favorite-pokemon-head2head/" class="project-image" target="_blank" rel="noopener">
               <img src="images/pick-a-mon.png" alt="The Pick-a-Mon home screen: two Pokémon face off under the Pick-a-Mon title" loading="lazy">
             </a>

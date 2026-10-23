@@ -515,6 +515,111 @@ a:hover {
   display: block;
 }
 
+/* Case Study Pages */
+.hero-eyebrow {
+  margin-bottom: var(--spacing-sm);
+  font-weight: 500;
+}
+
+.case-figure {
+  margin: 0 0 var(--spacing-xl);
+}
+
+.case-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+}
+
+.case-figure figcaption {
+  margin-top: var(--spacing-xs);
+  font-size: 0.875rem;
+  color: var(--text-light);
+  text-align: center;
+}
+
+.case-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+}
+
+.case-split {
+  align-items: center;
+}
+
+.case-phone {
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.case-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.case-step {
+  background-color: var(--background-light);
+  padding: var(--spacing-lg);
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-color);
+}
+
+.case-step h3 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.case-step p {
+  margin: 0;
+}
+
+.case-step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: var(--spacing-sm);
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 700;
+}
+
+.case-notes h3 {
+  margin-bottom: var(--spacing-md);
+}
+
+.case-notes ul,
+.case-list {
+  padding-left: var(--spacing-lg);
+  color: var(--text-light);
+}
+
+.case-notes li,
+.case-list li {
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.7;
+}
+
+.case-notes strong {
+  color: var(--text-dark);
+}
+
+.skill-category p {
+  margin: 0;
+}
+
+.case-cta {
+  margin-top: var(--spacing-xl);
+}
+
 /* Footer */
 footer {
   background-color: var(--background-light);
@@ -567,6 +672,10 @@ footer {
   }
 
   .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .case-gallery {
     grid-template-columns: 1fr;
   }
 
