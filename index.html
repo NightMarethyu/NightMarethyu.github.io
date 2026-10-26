@@ -85,6 +85,7 @@
               <span class="skill-tag">SQL</span>
               <span class="skill-tag">Java</span>
               <span class="skill-tag">C++</span>
+              <span class="skill-tag">Rust</span>
             </div>
           </div>
           <div class="skill-category">
@@ -128,6 +129,34 @@
         <p class="section-subtitle">A selection of work showcasing problem-solving, technical depth, and creative approach to software development</p>
         
         <div class="projects-grid">
+          <article class="project-card featured">
+            <a href="projects/dungeon-elements.html" class="project-image">
+              <img src="images/dungeon-elements/form-view.png" alt="Dungeon Elements in the dark theme: a campaign's folders in a file tree, three open tabs, and an item note shown as a form" loading="lazy">
+            </a>
+            <div class="project-header">
+              <h3>Dungeon Elements</h3>
+              <span class="project-status">Early Development · v0.1</span>
+            </div>
+            <div class="project-body">
+              <p>A local-first campaign manager for tabletop RPGs, built as a native desktop app in Rust. A campaign is just a folder, and every note is a Markdown file with YAML front matter that Obsidian and any text editor can read, so a game master's years of work never get locked into a proprietary format or someone else's server.</p>
+              <p>Folders define the fields their notes have, so an NPC or an item opens as a form and saves back to plain Markdown. On load, the app checks every file for anything it can't show as intended and explains each problem without changing a thing, and it notices files edited in other apps without ever silently overwriting them. Custom YAML color themes, and single-file releases for Windows, Linux, and macOS built with GitHub Actions.</p>
+              <div class="project-tech">
+                <span class="tech">Rust</span>
+                <span class="tech">iced</span>
+                <span class="tech">serde</span>
+                <span class="tech">YAML</span>
+                <span class="tech">Markdown</span>
+                <span class="tech">Desktop GUI</span>
+                <span class="tech">GitHub Actions</span>
+              </div>
+            </div>
+            <div class="project-footer project-links">
+              <a href="projects/dungeon-elements.html" class="project-link">Read the Case Study →</a>
+              <a href="https://github.com/NightMarethyu/dungeon_elements/releases" class="project-link" target="_blank" rel="noopener">Download →</a>
+              <a href="https://github.com/NightMarethyu/dungeon_elements" class="project-link" target="_blank" rel="noopener">View Code →</a>
+            </div>
+          </article>
+
           <article class="project-card featured">
             <a href="projects/dungeon-delver.html" class="project-image">
               <img src="images/dungeon-delver/map-view.png" alt="Dungeon Delver's map of a two-floor dungeon in the dark theme, with the critical path glowing green and lock icons on the doors" loading="lazy">
