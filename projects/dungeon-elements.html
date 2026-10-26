@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dungeon Elements: a local-first campaign manager for tabletop RPGs by Ammon Turner, built in Rust with iced.">
+  <title>Dungeon Elements | Ammon Turner</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="../index.html" class="logo">AT</a>
+        <ul class="nav-menu">
+          <li><a href="../index.html#about" class="nav-link">About</a></li>
+          <li><a href="../index.html#skills" class="nav-link">Skills</a></li>
+          <li><a href="../index.html#projects" class="nav-link">Projects</a></li>
+          <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <p class="hero-eyebrow"><a href="../index.html#projects">← All projects</a></p>
+      <h1>Dungeon Elements</h1>
+      <p class="hero-subtitle">A local-first campaign manager for tabletop RPGs</p>
+      <p class="hero-description">A native desktop app in Rust that keeps every note as plain Markdown on your own drive.</p>
+      <div class="hero-cta">
+        <a href="https://github.com/NightMarethyu/dungeon_elements/releases" class="btn btn-primary" target="_blank" rel="noopener">Download v0.1.0</a>
+        <a href="https://github.com/NightMarethyu/dungeon_elements" class="btn btn-secondary" target="_blank" rel="noopener">View the Code</a>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <figure class="case-figure">
+          <img src="../images/dungeon-elements/form-view.png" alt="Dungeon Elements in the dark theme: a campaign's folders in a file tree on the left, three open tabs, and an item note shown as a form with Name, Value, Rarity, Owner, History, and Stats fields">
+          <figcaption>An item note opened as a form. The folder's type decides the fields, and the file on disk is still plain Markdown.</figcaption>
+        </figure>
+
+        <div class="about-content">
+          <div class="about-text">
+            <h2>The Problem</h2>
+            <p>
+              Game masters pour years into their campaigns: NPCs, locations, quests, lore, and session notes. Most campaign tools keep that work in <strong>a proprietary format on someone else's server</strong>, so it lasts only as long as the service does. Plain text files last forever, but a folder of loose notes has no structure and no checks.
+            </p>
+            <p>
+              Dungeon Elements gives you both. A campaign is just a folder, and every note is a <strong>Markdown file with YAML front matter</strong> that Obsidian and any text editor can read. On top of that, each folder can define the fields its notes have, so an NPC opens as a form with a role, a location, and a disposition, and the app checks every file for anything it can't show as intended.
+            </p>
+          </div>
+          <div class="about-highlights">
+            <div class="highlight">
+              <span class="highlight-label">Role</span>
+              <p>Solo project: design, code, logo, and releases</p>
+            </div>
+            <div class="highlight">
+              <span class="highlight-label">Stack</span>
+              <p>Rust 2024 • iced 0.14 • serde • YAML • resvg • GitHub Actions</p>
+            </div>
+            <div class="highlight">
+              <span class="highlight-label">Status</span>
+              <p>Early development, version 0.1.0 (October 2026)</p>
+            </div>
+            <div class="highlight">
+              <span class="highlight-label">Platforms</span>
+              <p>Windows, Linux, and macOS (universal). No accounts, no cloud.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section skills-section">
+      <div class="container">
+        <h2>How a Note Works</h2>
+        <p class="section-subtitle">The core idea is that the form and the file are two views of the same note. Nothing about a note lives anywhere except in its own Markdown file.</p>
+
+        <div class="case-steps">
+          <div class="case-step">
+            <span class="case-step-number">1</span>
+            <h3>A folder declares a type</h3>
+            <p>A <code>_type.yaml</code> in a folder lists the fields its notes have: text, numbers, choices, tags, <code>[[links]]</code> to other notes, checkboxes, or long text. New campaigns get a starter set for items, NPCs, locations, quests, lore, players, and a journal.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-number">2</span>
+            <h3>The note opens as a form</h3>
+            <p>The parser splits the file into front matter and <code>##</code> sections. Short fields come from the front matter and long text from the sections, the same layout Obsidian uses. A note can add or drop fields of its own without changing the folder's type.</p>
+          </div>
+          <div class="case-step">
+            <span class="case-step-number">3</span>
+            <h3>Saving writes plain Markdown</h3>
+            <p>Saving turns the form back into YAML front matter and Markdown sections, keeping keys the form doesn't know about. One shortcut (Ctrl+E) shows the raw file, so there's never any hidden state.</p>
+          </div>
+        </div>
+
+        <div class="case-notes">
+          <h3>Design decisions worth calling out</h3>
+          <ul>
+            <li><strong>The user's files are the source of truth.</strong> There is no database or cache to fall out of sync. If someone stops using the app, their campaign comes with them, untouched.</li>
+            <li><strong>Check, never repair.</strong> Opening a campaign checks every note and type file: broken front matter, a word in a number field, a choice that isn't an option, repeated sections, unknown types. Problems get a ⚠ and a plain-English explanation, but nothing is changed for the user.</li>
+            <li><strong>Edits from other apps are expected.</strong> When the window regains focus, the app compares each open file's modified time with the version it loaded. Clean tabs reload; tabs with unsaved changes ask which version to keep, and saving never silently overwrites an outside edit.</li>
+            <li><strong>Fail soft.</strong> A broken user theme file is skipped with a warning, and a note the form can't read opens as its Markdown source instead. The app should never crash on a file the user wrote.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>The App</h2>
+        <div class="case-gallery">
+          <figure class="case-figure">
+            <img src="../images/dungeon-elements/types-dialog.png" alt="The Edit > Types dialog: campaign folders on the left, and the Item type's fields on the right with their key, kind, width, and options" loading="lazy">
+            <figcaption>Edit &gt; Types changes the fields of every note in a folder: names, keys, kinds, widths, options, and order.</figcaption>
+          </figure>
+          <figure class="case-figure">
+            <img src="../images/dungeon-elements/file-check.png" alt="The Problems dialog explaining that a note's Rarity is Mythic, which isn't one of its options, with a warning icon on the note in the file tree" loading="lazy">
+            <figcaption>A note edited by hand with a rarity that isn't an option. The file tree marks it, and the Problems list says exactly what's wrong.</figcaption>
+          </figure>
+        </div>
+        <div class="about-content case-split">
+          <div class="about-text">
+            <p>
+              The interface is built with <strong>iced</strong>, a native Rust GUI library that follows the Elm architecture: all state lives in one model, every input is a message, and the view is a pure function of the state. That made features like tabs, unsaved-change prompts, and reloading files on focus predictable to add.
+            </p>
+            <p>
+              Every color comes from a <strong>YAML theme</strong> with named roles like sidebar, tabs, fields, and accent. Dark and High Contrast ship with the app, users can drop their own theme files in a config folder, and any color a theme leaves out falls back to its base. The logo is an SVG recolored to match the theme.
+            </p>
+            <p>
+              The app ships as <strong>a single file</strong>: themes, templates, and the logo are compiled in. The release build uses link-time optimization and is stripped, and a GitHub Actions workflow builds the universal macOS app on Apple's runners and merges the Apple silicon and Intel builds with <code>lipo</code>.
+            </p>
+          </div>
+          <figure class="case-figure">
+            <img src="../images/dungeon-elements/markdown-source.png" alt="The same item note shown as its Markdown source: YAML front matter with type, name, value, rarity, and owner, then History and Stats sections" loading="lazy">
+            <figcaption>The same note as its Markdown source (Ctrl+E). This is exactly what's on disk.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section skills-section">
+      <div class="container">
+        <h2>Engineering Choices</h2>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>Why Rust</h3>
+            <p>A campaign manager holds years of someone's creative work, so stability matters more than anything. Rust gives a fast native app with no runtime to install, and its type system catches whole classes of bugs before they reach a user's files.</p>
+          </div>
+          <div class="skill-category">
+            <h3>Small, focused modules</h3>
+            <p>Parsing notes, content types, the form, file checks, themes, and the campaign tree each live in their own module, with unit tests on the parts that touch files, like front matter parsing, content types, and the file checker.</p>
+          </div>
+          <div class="skill-category">
+            <h3>Interoperable by design</h3>
+            <p>Notes use the same front matter and <code>[[link]]</code> format as Obsidian, and tags are stored as a YAML list so Obsidian reads them as tags. Users can switch between the two tools freely.</p>
+          </div>
+          <div class="skill-category">
+            <h3>Planned and documented</h3>
+            <p>The work follows a phased plan with checklists, every release is recorded in a Keep a Changelog file with semantic versions, and a release guide covers packaging for all three platforms.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>What's Next</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              Version 0.1.0 finishes <strong>Phase 0, <em>Call to Action</em></strong>: the app, campaigns, typed notes, file checks, themes, and releases for three platforms. Phase 1 turns the notes into <strong>a connected wiki of the world</strong>, and Phase 2 adds drawing and generator tools for building it.
+            </p>
+          </div>
+          <div class="about-text">
+            <ul class="case-list">
+              <li>Rendered Markdown with live preview</li>
+              <li>Clickable <code>[[links]]</code> that survive renames</li>
+              <li>Highlight a name and choose "Add link" to create a page</li>
+              <li>A built-in dice roller</li>
+              <li>A basic SVG map editor</li>
+              <li>Name and roll table generators</li>
+            </ul>
+          </div>
+        </div>
+        <div class="hero-cta case-cta">
+          <a href="https://github.com/NightMarethyu/dungeon_elements/releases" class="btn btn-primary" target="_blank" rel="noopener">Download v0.1.0</a>
+          <a href="https://github.com/NightMarethyu/dungeon_elements" class="btn btn-secondary" target="_blank" rel="noopener">View the Code</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Ammon Turner. All rights reserved.</p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
