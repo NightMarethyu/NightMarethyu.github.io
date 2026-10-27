@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Dungeon Elements: a local-first campaign manager for tabletop RPGs by Ammon Turner, built in Rust with iced.">
+  <meta name="description" content="Dungeon Elements: a local-first campaign manager and wiki for tabletop RPGs by Ammon Turner, built in Rust with iced.">
   <title>Dungeon Elements | Ammon Turner</title>
   <link rel="stylesheet" href="../styles.css">
 </head>
@@ -24,10 +24,10 @@
     <section class="hero">
       <p class="hero-eyebrow"><a href="../index.html#projects">← All projects</a></p>
       <h1>Dungeon Elements</h1>
-      <p class="hero-subtitle">A local-first campaign manager for tabletop RPGs</p>
-      <p class="hero-description">A native desktop app in Rust that keeps every note as plain Markdown on your own drive.</p>
+      <p class="hero-subtitle">A local-first campaign manager and wiki for tabletop RPGs</p>
+      <p class="hero-description">A native desktop app in Rust that keeps every note as plain Markdown on your own drive, linked together like a wiki.</p>
       <div class="hero-cta">
-        <a href="https://github.com/NightMarethyu/dungeon_elements/releases" class="btn btn-primary" target="_blank" rel="noopener">Download v0.1.0</a>
+        <a href="https://github.com/NightMarethyu/dungeon_elements/releases" class="btn btn-primary" target="_blank" rel="noopener">Download v0.2.0</a>
         <a href="https://github.com/NightMarethyu/dungeon_elements" class="btn btn-secondary" target="_blank" rel="noopener">View the Code</a>
       </div>
     </section>
@@ -37,18 +37,18 @@
     <section class="section">
       <div class="container">
         <figure class="case-figure">
-          <img src="../images/dungeon-elements/form-view.png" alt="Dungeon Elements in the dark theme: a campaign's folders in a file tree on the left, three open tabs, and an item note shown as a form with Name, Value, Rarity, Owner, History, and Stats fields">
-          <figcaption>An item note opened as a form. The folder's type decides the fields, and the file on disk is still plain Markdown.</figcaption>
+          <img src="../images/dungeon-elements/reading-view.png" alt="Dungeon Elements in the dark theme showing an NPC note in the reading view: formatted headings and text, a wiki-style box of fields on the right, clickable links to other notes, and a task list">
+          <figcaption>An NPC note in the reading view: formatted like a wiki page, with its fields in a box on the right and links to other notes. On disk it's still plain Markdown.</figcaption>
         </figure>
 
         <div class="about-content">
           <div class="about-text">
             <h2>The Problem</h2>
             <p>
-              Game masters pour years into their campaigns: NPCs, locations, quests, lore, and session notes. Most campaign tools keep that work in <strong>a proprietary format on someone else's server</strong>, so it lasts only as long as the service does. Plain text files last forever, but a folder of loose notes has no structure and no checks.
+              Game masters pour years into their campaigns: NPCs, locations, quests, lore, and session notes. Most campaign tools keep that work in <strong>a proprietary format on someone else's server</strong>, so it lasts only as long as the service does. Plain text files last forever, but a folder of loose notes has no structure, no links, and no checks.
             </p>
             <p>
-              Dungeon Elements gives you both. A campaign is just a folder, and every note is a <strong>Markdown file with YAML front matter</strong> that Obsidian and any text editor can read. On top of that, each folder can define the fields its notes have, so an NPC opens as a form with a role, a location, and a disposition, and the app checks every file for anything it can't show as intended.
+              Dungeon Elements gives you both. A campaign is just a folder, and every note is a <strong>Markdown file with YAML front matter</strong> that Obsidian and any text editor can read. Each folder can define the fields its notes have, so an NPC opens as a form with a role, a location, and a disposition. Notes link to each other with <code>[[links]]</code> that <strong>survive renames</strong>, and every note shows what links back to it, so the campaign grows into a wiki of the world.
             </p>
           </div>
           <div class="about-highlights">
@@ -58,11 +58,11 @@
             </div>
             <div class="highlight">
               <span class="highlight-label">Stack</span>
-              <p>Rust 2024 • iced 0.14 • serde • YAML • resvg • GitHub Actions</p>
+              <p>Rust 2024 • iced 0.14 • serde • pulldown-cmark • syntect • notify • GitHub Actions</p>
             </div>
             <div class="highlight">
               <span class="highlight-label">Status</span>
-              <p>Early development, version 0.1.0 (October 2026)</p>
+              <p>Early development, version 0.2.0 (October 2026). About 17,000 lines of Rust and 111 unit tests.</p>
             </div>
             <div class="highlight">
               <span class="highlight-label">Platforms</span>
@@ -76,33 +76,34 @@
     <section class="section skills-section">
       <div class="container">
         <h2>How a Note Works</h2>
-        <p class="section-subtitle">The core idea is that the form and the file are two views of the same note. Nothing about a note lives anywhere except in its own Markdown file.</p>
+        <p class="section-subtitle">The form, the Markdown, and the reading view are three views of the same note. Nothing about a note lives anywhere except in its own file.</p>
 
         <div class="case-steps">
           <div class="case-step">
             <span class="case-step-number">1</span>
             <h3>A folder declares a type</h3>
-            <p>A <code>_type.yaml</code> in a folder lists the fields its notes have: text, numbers, choices, tags, <code>[[links]]</code> to other notes, checkboxes, or long text. New campaigns get a starter set for items, NPCs, locations, quests, lore, players, and a journal.</p>
+            <p>A <code>_type.yaml</code> in a folder lists the fields its notes have: text, numbers, choices, tags, checkboxes, long text, or links to notes in another folder. New campaigns get a starter set for items, NPCs, locations, quests, lore, players, and a journal.</p>
           </div>
           <div class="case-step">
             <span class="case-step-number">2</span>
-            <h3>The note opens as a form</h3>
-            <p>The parser splits the file into front matter and <code>##</code> sections. Short fields come from the front matter and long text from the sections, the same layout Obsidian uses. A note can add or drop fields of its own without changing the folder's type.</p>
+            <h3>Edit it as a form or as text</h3>
+            <p>Short fields come from the front matter and long text from <code>##</code> sections, the layout Obsidian uses. A formatting toolbar writes the Markdown, so nobody has to learn it, and the Markdown marks are dimmed so the words stand out.</p>
           </div>
           <div class="case-step">
             <span class="case-step-number">3</span>
-            <h3>Saving writes plain Markdown</h3>
-            <p>Saving turns the form back into YAML front matter and Markdown sections, keeping keys the form doesn't know about. One shortcut (Ctrl+E) shows the raw file, so there's never any hidden state.</p>
+            <h3>Read it like a wiki page</h3>
+            <p>The reading view renders headings, tables, task lists, pictures, embedded notes, and syntax-colored code, with the fields in an infobox. Click any paragraph to edit it in place, or tick a task box with a click.</p>
           </div>
         </div>
 
         <div class="case-notes">
           <h3>Design decisions worth calling out</h3>
           <ul>
-            <li><strong>The user's files are the source of truth.</strong> There is no database or cache to fall out of sync. If someone stops using the app, their campaign comes with them, untouched.</li>
-            <li><strong>Check, never repair.</strong> Opening a campaign checks every note and type file: broken front matter, a word in a number field, a choice that isn't an option, repeated sections, unknown types. Problems get a ⚠ and a plain-English explanation, but nothing is changed for the user.</li>
-            <li><strong>Edits from other apps are expected.</strong> When the window regains focus, the app compares each open file's modified time with the version it loaded. Clean tabs reload; tabs with unsaved changes ask which version to keep, and saving never silently overwrites an outside edit.</li>
-            <li><strong>Fail soft.</strong> A broken user theme file is skipped with a warning, and a note the form can't read opens as its Markdown source instead. The app should never crash on a file the user wrote.</li>
+            <li><strong>The user's files are the source of truth.</strong> There is no database to fall out of sync. If someone stops using the app, their campaign comes with them, untouched.</li>
+            <li><strong>Links that never break.</strong> Renaming or moving a note rewrites every link to it across the campaign: in note text, in front matter fields, and in open tabs with unsaved changes. Shown text, heading links, embeds, and aliases are kept, and names are written back with the escaping YAML needs.</li>
+            <li><strong>Edits from other apps are expected.</strong> The campaign folder is watched, so notes edited, renamed, or deleted in Obsidian or a file manager are picked up right away: tabs follow renamed notes, links are updated, and saving never silently overwrites an outside edit.</li>
+            <li><strong>Check, then offer fixes.</strong> Every note is checked for problems like broken front matter, a word in a number field, or a link to a note that was renamed elsewhere. Each problem comes with fixes to pick from (link the note it probably meant, create the missing one, or ignore it), and checks re-run as you type.</li>
+            <li><strong>Any name works.</strong> Note names can hold apostrophes, quotes, colons, accents, and emoji. The app keeps the name as typed and picks a file name that's valid on Windows, macOS, and Linux, adding an alias so links still find it.</li>
           </ul>
         </div>
       </div>
@@ -113,29 +114,29 @@
         <h2>The App</h2>
         <div class="case-gallery">
           <figure class="case-figure">
-            <img src="../images/dungeon-elements/types-dialog.png" alt="The Edit > Types dialog: campaign folders on the left, and the Item type's fields on the right with their key, kind, width, and options" loading="lazy">
-            <figcaption>Edit &gt; Types changes the fields of every note in a folder: names, keys, kinds, widths, options, and order.</figcaption>
+            <img src="../images/dungeon-elements/link-suggestions.png" alt="A quest note's Objectives field while typing a new task with an open [[ link; a bar under the editor suggests four notes to link to" loading="lazy">
+            <figcaption>Typing <code>[[</code> closes the link and suggests notes by name, alias, or file name. Pressing Enter in a task list started the next task.</figcaption>
           </figure>
           <figure class="case-figure">
-            <img src="../images/dungeon-elements/file-check.png" alt="The Problems dialog explaining that a note's Rarity is Mythic, which isn't one of its options, with a warning icon on the note in the file tree" loading="lazy">
-            <figcaption>A note edited by hand with a rarity that isn't an option. The file tree marks it, and the Problems list says exactly what's wrong.</figcaption>
+            <img src="../images/dungeon-elements/backlinks.png" alt="The end of an NPC's reading view: a Linked from section listing four notes grouped by kind, each with the line or field that links to the NPC" loading="lazy">
+            <figcaption>"Linked from" lists every note that links here, grouped by kind, with the line or field each link is in.</figcaption>
           </figure>
         </div>
         <div class="about-content case-split">
           <div class="about-text">
             <p>
-              The interface is built with <strong>iced</strong>, a native Rust GUI library that follows the Elm architecture: all state lives in one model, every input is a message, and the view is a pure function of the state. That made features like tabs, unsaved-change prompts, and reloading files on focus predictable to add.
+              The interface is built with <strong>iced</strong>, a native Rust GUI library that follows the Elm architecture: all state lives in one model, every input is a message, and the view is a pure function of the state. That made features like tabs, unsaved-change prompts, right-click menus, and live reloading from disk predictable to add.
             </p>
             <p>
-              Every color comes from a <strong>YAML theme</strong> with named roles like sidebar, tabs, fields, and accent. Dark and High Contrast ship with the app, users can drop their own theme files in a config folder, and any color a theme leaves out falls back to its base. The logo is an SVG recolored to match the theme.
+              The built-in <strong>dice roller</strong> parses expressions like <code>2d6+3</code>, <code>d%</code>, and <code>4d6kh3</code>, with advantage and disadvantage. Fields with dice in them, like a sword's damage, get roll buttons right on the note.
             </p>
             <p>
-              The app ships as <strong>a single file</strong>: themes, templates, and the logo are compiled in. The release build uses link-time optimization and is stripped, and a GitHub Actions workflow builds the universal macOS app on Apple's runners and merges the Apple silicon and Intel builds with <code>lipo</code>.
+              The app ships as <strong>a single file</strong> with themes and templates compiled in. Every color comes from a user-editable YAML theme, including code highlighting. A GitHub Actions workflow builds the universal macOS app and merges the Apple silicon and Intel builds with <code>lipo</code>.
             </p>
           </div>
           <figure class="case-figure">
-            <img src="../images/dungeon-elements/markdown-source.png" alt="The same item note shown as its Markdown source: YAML front matter with type, name, value, rarity, and owner, then History and Stats sections" loading="lazy">
-            <figcaption>The same note as its Markdown source (Ctrl+E). This is exactly what's on disk.</figcaption>
+            <img src="../images/dungeon-elements/dice-roller.png" alt="A sword's reading view with Attack and Damage roll buttons in its box of fields, and the dice roller open at the bottom showing an attack rolled with advantage: 12, a crossed-out 9, plus 7, equals 19" loading="lazy">
+            <figcaption>Rolling a sword's attack with advantage straight from its fields. The lower die is crossed out.</figcaption>
           </figure>
         </div>
       </div>
@@ -151,15 +152,15 @@
           </div>
           <div class="skill-category">
             <h3>Small, focused modules</h3>
-            <p>Parsing notes, content types, the form, file checks, themes, and the campaign tree each live in their own module, with unit tests on the parts that touch files, like front matter parsing, content types, and the file checker.</p>
+            <p>Note parsing, links, backlinks, file checks and fixes, the folder watcher, the reading view, and the dice roller each live in their own module, with 111 unit tests on the logic that reads and rewrites users' files.</p>
           </div>
           <div class="skill-category">
             <h3>Interoperable by design</h3>
-            <p>Notes use the same front matter and <code>[[link]]</code> format as Obsidian, and tags are stored as a YAML list so Obsidian reads them as tags. Users can switch between the two tools freely.</p>
+            <p>Notes use Obsidian's front matter, <code>[[link]]</code>, alias, and embed formats, so users can switch between the two tools freely. Hidden folders like <code>.obsidian</code> are left alone.</p>
           </div>
           <div class="skill-category">
             <h3>Planned and documented</h3>
-            <p>The work follows a phased plan with checklists, every release is recorded in a Keep a Changelog file with semantic versions, and a release guide covers packaging for all three platforms.</p>
+            <p>The work follows a phased plan with checklists, every release is recorded in a Keep a Changelog file with semantic versions and known limitations, and a release guide covers packaging for all three platforms.</p>
           </div>
         </div>
       </div>
@@ -171,22 +172,22 @@
         <div class="about-content">
           <div class="about-text">
             <p>
-              Version 0.1.0 finishes <strong>Phase 0, <em>Call to Action</em></strong>: the app, campaigns, typed notes, file checks, themes, and releases for three platforms. Phase 1 turns the notes into <strong>a connected wiki of the world</strong>, and Phase 2 adds drawing and generator tools for building it.
+              Version 0.1.0 finished <strong>Phase 0, <em>Call to Action</em></strong>: campaigns, typed notes, file checks, themes, and releases for three platforms. Version 0.2.0 finishes <strong>Phase 1, <em>Inciting Incident</em></strong>: links, backlinks, the reading view, the formatting toolbar, and the dice roller. The next phases build tools for running the game on top of that wiki.
             </p>
           </div>
           <div class="about-text">
             <ul class="case-list">
-              <li>Rendered Markdown with live preview</li>
-              <li>Clickable <code>[[links]]</code> that survive renames</li>
-              <li>Highlight a name and choose "Add link" to create a page</li>
-              <li>A built-in dice roller</li>
-              <li>A basic SVG map editor</li>
+              <li>Player, NPC, and quest management</li>
               <li>Name and roll table generators</li>
+              <li>A journaling tool for solo play and session notes</li>
+              <li>An SVG map editor, with pins that link to notes</li>
+              <li>Map generators, from dungeons up to whole worlds</li>
+              <li>Campaign templates and player handouts</li>
             </ul>
           </div>
         </div>
         <div class="hero-cta case-cta">
-          <a href="https://github.com/NightMarethyu/dungeon_elements/releases" class="btn btn-primary" target="_blank" rel="noopener">Download v0.1.0</a>
+          <a href="https://github.com/NightMarethyu/dungeon_elements/releases" class="btn btn-primary" target="_blank" rel="noopener">Download v0.2.0</a>
           <a href="https://github.com/NightMarethyu/dungeon_elements" class="btn btn-secondary" target="_blank" rel="noopener">View the Code</a>
         </div>
       </div>

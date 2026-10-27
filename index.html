@@ -131,15 +131,15 @@
         <div class="projects-grid">
           <article class="project-card featured">
             <a href="projects/dungeon-elements.html" class="project-image">
-              <img src="images/dungeon-elements/form-view.png" alt="Dungeon Elements in the dark theme: a campaign's folders in a file tree, three open tabs, and an item note shown as a form" loading="lazy">
+              <img src="images/dungeon-elements/reading-view.png" alt="Dungeon Elements in the dark theme: an NPC note in the reading view, formatted like a wiki page with a box of fields and links to other notes" loading="lazy">
             </a>
             <div class="project-header">
               <h3>Dungeon Elements</h3>
-              <span class="project-status">Early Development · v0.1</span>
+              <span class="project-status">Early Development · v0.2</span>
             </div>
             <div class="project-body">
-              <p>A local-first campaign manager for tabletop RPGs, built as a native desktop app in Rust. A campaign is just a folder, and every note is a Markdown file with YAML front matter that Obsidian and any text editor can read, so a game master's years of work never get locked into a proprietary format or someone else's server.</p>
-              <p>Folders define the fields their notes have, so an NPC or an item opens as a form and saves back to plain Markdown. On load, the app checks every file for anything it can't show as intended and explains each problem without changing a thing, and it notices files edited in other apps without ever silently overwriting them. Custom YAML color themes, and single-file releases for Windows, Linux, and macOS built with GitHub Actions.</p>
+              <p>A local-first campaign manager and wiki for tabletop RPGs, built as a native desktop app in Rust. A campaign is just a folder, and every note is a Markdown file with YAML front matter that Obsidian and any text editor can read, so a game master's years of work never get locked into a proprietary format or someone else's server.</p>
+              <p>Folders define the fields their notes have, so an NPC opens as a form, and a reading view shows it like a wiki page. Notes link with <code>[[links]]</code> that are rewritten across the campaign when a note is renamed or moved, even from another app, and each note lists what links back to it. A file watcher, checks with one-click fixes, a formatting toolbar, and a dice roller that parses expressions like <code>4d6kh3</code> (roll 4 6-sided dice, keep highest 3). About 17,000 lines of Rust with 111 unit tests, released for Windows, Linux, and macOS.</p>
               <div class="project-tech">
                 <span class="tech">Rust</span>
                 <span class="tech">iced</span>
